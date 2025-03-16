@@ -1,79 +1,147 @@
-# Crosswordle - A Daily Word Puzzle Game
+# Word Games Collection
 
-A daily puzzle game inspired by Wordle where players try to guess two crossing words simultaneously.
+A collection of word-based puzzle games inspired by Wordle, built with Next.js, React, and TypeScript.
 
-## How to Play
+## 🎮 Available Games
 
-- Fill in the horizontal word first, then the vertical word
-- Each guess is evaluated against both words
-- Green tiles indicate correct letters in the correct position
-- Yellow tiles indicate correct letters in the wrong position  
-- Orange tiles indicate letters that appear in the other crossing word
-- Gray tiles indicate letters that don't appear in either word
-- The words are related thematically
-- New puzzle every day!
+This repository includes the following word games:
 
-## How to Host on GitHub Pages
+1. **Classic Wordle** - The original Wordle experience with daily puzzles
+2. **Hard Mode** - 6-letter words with fewer attempts
+3. **Backwards Wordle** - Enter words in reverse
+4. **Chain Wordle** - Each guess must start with the last letter of the previous word
+5. **Double Wordle** - Solve two puzzles simultaneously using the same guesses
+6. **Speed Wordle** - Race against the clock to solve shorter 4-letter words
+7. **Crosswordle** - Solve intersecting horizontal and vertical words
+8. **Waffle Wordle** - Rearrange letters to form valid words in both directions
 
-1. Fork this repository
-2. Enable GitHub Pages in your repository settings:
-   - Go to Settings > Pages
-   - Select the `main` branch as the source
-   - Choose the root folder (`/`)
-   - Click Save
+## 🚀 Getting Started
 
-Your game will be available at `https://[your-username].github.io/[repository-name]/`
+### Prerequisites
 
-## Adding New Puzzles
-
-Puzzles are stored in `src/data/crosswordlePuzzles.json`. To add new puzzles:
-
-1. Open the file `src/data/crosswordlePuzzles.json`
-2. Add new entries to the `puzzles` array following this format:
-
-```json
-{
-  "id": 1015,  // Increment the ID for each new puzzle
-  "horizontal": "HEART",  // 5-letter horizontal word
-  "vertical": "HAPPY",    // 5-letter vertical word 
-  "relation": "Both relate to emotions"  // Describe the relationship between words
-}
-```
-
-3. Ensure both words share at least one letter so they can cross
-4. The game selects puzzles based on the current date:
-   - The puzzle number is calculated as 1000 + days since Jan 1, 2023
-   - Puzzles are then matched by ID
-   - If no exact match is found, it cycles through available puzzles
-
-## Rules for Good Puzzles
-
-1. Both words must be 5 letters long
-2. Words should share at least one common letter (for the crossing)
-3. Use common, recognizable words
-4. Choose words with a clear thematic relationship
-5. Avoid obscure words, slang, or offensive content
-
-## Development
+- Node.js (v16 or higher)
+- npm or yarn
 
 ### Installation
 
 ```bash
+# Clone the repository
+git clone https://github.com/Anextio/games-page.git
+cd games-page
+
+# Install dependencies
 npm install
-```
 
-### Running Locally
-
-```bash
+# Run development server
 npm run dev
 ```
 
-### Building for Production
+The app will be available at http://localhost:3000
+
+## 📝 Adding New Puzzles
+
+This project includes scripts to help manage puzzles for games that use daily challenges.
+
+### Adding a New Puzzle
+
+Use the `add-puzzle` script to add a new puzzle:
 
 ```bash
-npm run build
+npm run add-puzzle -- --type <game-type> --word <word> --date <date> [--hint <hint>]
 ```
 
-## License
+Parameters:
+- `type`: The game type (classic, hard, crosswordle, etc.)
+- `word`: The solution word
+- `date`: The date for the puzzle (YYYY-MM-DD format)
+- `hint`: Optional hint (for games that use hints)
 
-MIT
+Example:
+```bash
+npm run add-puzzle -- --type classic --word TRAIN --date 2023-06-01
+```
+
+For Crosswordle puzzles (which require horizontal and vertical words):
+```bash
+npm run add-puzzle -- --type crosswordle --word "TRAIN,APPLE" --date 2023-06-01 --hint "Transportation and fruit"
+```
+
+### Validating Puzzles
+
+To ensure all puzzles are valid, run:
+
+```bash
+npm run validate-puzzles
+```
+
+This script checks:
+- All words are valid
+- No duplicate dates for the same game type
+- Correct word length for each game type
+- Proper formatting
+
+## 📂 Project Structure
+
+```
+games-page/
+├── src/
+│   ├── app/                 # Next.js app directory
+│   │   ├── games/           # Game pages
+│   │   │   ├── classic/
+│   │   │   ├── hard/
+│   │   │   ├── backwards/
+│   │   │   └── ...
+│   ├── components/          # Shared React components
+│   ├── data/                # Game data including word lists
+│   ├── hooks/               # Custom React hooks
+│   ├── types/               # TypeScript type definitions
+│   └── utils/               # Utility functions
+├── public/                  # Static assets
+├── scripts/                 # Helper scripts for puzzle management
+│   ├── addPuzzle.js         # Script for adding new puzzles
+│   └── validatePuzzles.js   # Script for validating puzzles
+└── ...
+```
+
+## 🔄 Game Configuration
+
+Each game has its own configuration that determines its behavior:
+
+```typescript
+// Example game configuration
+const gameConfig = {
+  type: 'classic',           // Game type identifier
+  wordLength: 5,             // Length of solution words
+  maxAttempts: 6,            // Number of allowed guesses
+  timeLimit: null            // Time limit (for timed games)
+}
+```
+
+## 🌐 Deployment
+
+This project is deployed to GitHub Pages using GitHub Actions. When you push to the main branch, the app is automatically built and deployed to https://anextio.github.io/games-page/
+
+### Manual Deployment
+
+If you want to deploy manually:
+
+1. Build the project:
+   ```bash
+   npm run build
+   ```
+
+2. The static files will be generated in the `out` directory.
+
+## 🤝 Contributing
+
+Contributions are welcome! Feel free to add new games, improve existing ones, or enhance the user interface.
+
+1. Fork the repository
+2. Create a feature branch: `git checkout -b feature/amazing-feature`
+3. Commit your changes: `git commit -m 'Add some amazing feature'`
+4. Push to the branch: `git push origin feature/amazing-feature`
+5. Open a Pull Request
+
+## 📄 License
+
+This project is licensed under the MIT License.
