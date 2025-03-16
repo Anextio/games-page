@@ -1,17 +1,19 @@
 "use client"
 
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import Tutorial from '@/components/Tutorial'
 import Toast from '@/components/Toast'
 import PuzzleSelector from '@/components/PuzzleSelector'
 import { validateWordWithCache } from '@/utils/wordValidation'
-import { format, differenceInDays, subDays, parseISO } from 'date-fns'
+import { format, differenceInDays, subDays, parseISO, formatISO } from 'date-fns'
 import puzzleData from '@/data/crosswordlePuzzles.json'
 import usePuzzleHistory from '@/hooks/usePuzzleHistory'
+import Grid from '@/components/Grid'
+import Keyboard from '@/components/Keyboard'
 
 const TUTORIAL_SHOWN_KEY = 'crosswordle-tutorial-shown'
-const COMPLETED_PUZZLES_KEY = 'crosswordle-completed-puzzles'
-const CURRENT_PUZZLE_KEY = 'crosswordle-current-puzzle'
+const _COMPLETED_PUZZLES_KEY = 'crosswordle-completed-puzzles'
+const _CURRENT_PUZZLE_KEY = 'crosswordle-current-puzzle'
 
 // Color codes for feedback
 const COLORS = {
@@ -36,10 +38,12 @@ export default function Crosswordle() {
   const [errorMessage, setErrorMessage] = useState<string | null>(null)
   const [gameCompleted, setGameCompleted] = useState(false)
   const [gameStarted, setGameStarted] = useState(false)
-  const [showHint, setShowHint] = useState(false)
+  const [showHint, _setShowHint] = useState(true)
   const [activeOrientation, setActiveOrientation] = useState<'horizontal' | 'vertical'>('horizontal')
   const [copySuccess, setCopySuccess] = useState(false)
   const [showPuzzleSelector, setShowPuzzleSelector] = useState(false)
+  const [horizontalGuesses, setHorizontalGuesses] = useState<string[]>([])
+  const [verticalGuesses, setVerticalGuesses] = useState<string[]>([])
   
   const wordLength = 5
   
@@ -469,7 +473,7 @@ export default function Crosswordle() {
   }
   
   // Render compact feedback for latest guess
-  const renderCompactFeedback = () => {
+  const _renderCompactFeedback = () => {
     if (guesses.length === 0) return null
     
     // Get the most recent guess

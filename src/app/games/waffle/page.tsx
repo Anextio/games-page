@@ -265,7 +265,7 @@ export default function WaffleWordle() {
         <div className="text-center p-6 bg-red-50 rounded-lg mb-8">
           <h2 className="text-2xl font-bold text-red-800 mb-4">Game Over</h2>
           <p className="text-red-700 mb-4">
-            You've used all your swaps but haven't solved the waffle.
+            You&apos;ve used all your swaps but haven&apos;t solved the waffle.
           </p>
           <button
             onClick={() => window.location.reload()}

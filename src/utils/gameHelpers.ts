@@ -90,14 +90,15 @@ export const validateGuess = (
       }
       break
       
-    case 'numbers':
+    // Remove the numbers case since this game type no longer exists
+    /* case 'numbers':
       if (!/^\d+$/.test(guess)) {
         return {
           isValid: false,
           errorMessage: 'Guess must contain only digits'
         }
       }
-      break
+      break */
   }
   
   return { isValid: true }

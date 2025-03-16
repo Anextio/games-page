@@ -32,25 +32,6 @@ export default function DoubleWordle() {
     }
   }, [])
 
-  useEffect(() => {
-    const handleKeyup = (e: KeyboardEvent) => {
-      if (gameCompleted) return
-      
-      if (e.key === 'Enter') {
-        handleEnterKey()
-      } else if (e.key === 'Backspace') {
-        firstGame.onKeyPress('BACKSPACE')
-        secondGame.onKeyPress('BACKSPACE')
-      } else if (/^[A-Za-z]$/.test(e.key)) {
-        firstGame.onKeyPress(e.key.toUpperCase())
-        secondGame.onKeyPress(e.key.toUpperCase())
-      }
-    }
-
-    window.addEventListener('keyup', handleKeyup)
-    return () => window.removeEventListener('keyup', handleKeyup)
-  }, [firstGame, secondGame, gameCompleted])
-
   // Handle Enter key press - apply guess to both games
   const handleEnterKey = () => {
     // Only proceed if the guess is of correct length
@@ -69,6 +50,25 @@ export default function DoubleWordle() {
       setGameCompleted(true)
     }
   }
+
+  useEffect(() => {
+    const handleKeyup = (e: KeyboardEvent) => {
+      if (gameCompleted) return
+      
+      if (e.key === 'Enter') {
+        handleEnterKey()
+      } else if (e.key === 'Backspace') {
+        firstGame.onKeyPress('BACKSPACE')
+        secondGame.onKeyPress('BACKSPACE')
+      } else if (/^[A-Za-z]$/.test(e.key)) {
+        firstGame.onKeyPress(e.key.toUpperCase())
+        secondGame.onKeyPress(e.key.toUpperCase())
+      }
+    }
+
+    window.addEventListener('keyup', handleKeyup)
+    return () => window.removeEventListener('keyup', handleKeyup)
+  }, [firstGame, secondGame, gameCompleted, handleEnterKey])
 
   const isGameOver = firstGame.gameState.gameStatus !== 'playing' || 
                     secondGame.gameState.gameStatus !== 'playing' ||

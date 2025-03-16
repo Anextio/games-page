@@ -1,4 +1,4 @@
-export type GameType = 'classic' | 'speed' | 'double' | 'hard' | 'chain' | 'backwards' | 'crosswordle' | 'waffle' | 'numbers'
+export type GameType = 'classic' | 'speed' | 'double' | 'hard' | 'chain' | 'backwards' | 'crosswordle' | 'waffle'
 
 export interface GameConfig {
   type: GameType

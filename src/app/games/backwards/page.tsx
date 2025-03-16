@@ -86,7 +86,7 @@ export default function BackwardsWordle() {
       <div className="bg-gray-100 p-4 rounded-lg mb-6 text-center w-full max-w-md">
         <h2 className="text-lg font-semibold mb-2">Spell words in reverse!</h2>
         <p className="text-gray-700 italic mb-2">Enter any valid 5-letter word backwards</p>
-        <p className="text-gray-600 text-sm">Example: To enter "SMART", type "TRAMS"</p>
+        <p className="text-gray-600 text-sm">Example: To enter &quot;SMART&quot;, type &quot;TRAMS&quot;</p>
       </div>
       
       <div className="flex flex-col items-center w-full">

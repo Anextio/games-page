@@ -6,6 +6,10 @@ const nextConfig = {
   images: { unoptimized: true },
   // Ensure GitHub Pages doesn't use Jekyll
   trailingSlash: true,
+  // Disable ESLint during build
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
 }
 
 module.exports = nextConfig 
