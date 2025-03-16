@@ -1,0 +1,64 @@
+{
+  "puzzles": [
+    {
+      "id": 1,
+      "horizontal": "BEACH",
+      "vertical": "COAST",
+      "relation": "Both related to the shoreline"
+    },
+    {
+      "id": 2,
+      "horizontal": "TIGER",
+      "vertical": "HORSE",
+      "relation": "Both are animals"
+    },
+    {
+      "id": 3,
+      "horizontal": "APPLE",
+      "vertical": "PEACH",
+      "relation": "Both are fruits"
+    },
+    {
+      "id": 4,
+      "horizontal": "CLOUD",
+      "vertical": "STORM",
+      "relation": "Both related to weather"
+    },
+    {
+      "id": 5,
+      "horizontal": "RIVER",
+      "vertical": "OCEAN",
+      "relation": "Both are bodies of water"
+    },
+    {
+      "id": 6,
+      "horizontal": "PLANE",
+      "vertical": "TRAIN",
+      "relation": "Both are modes of transportation"
+    },
+    {
+      "id": 7,
+      "horizontal": "CHAIR",
+      "vertical": "TABLE",
+      "relation": "Both are furniture"
+    },
+    {
+      "id": 8,
+      "horizontal": "CLOCK",
+      "vertical": "WATCH",
+      "relation": "Both are timepieces"
+    },
+    {
+      "id": 9,
+      "horizontal": "EARTH",
+      "vertical": "VENUS",
+      "relation": "Both are planets in our solar system"
+    },
+    {
+      "id": 10,
+      "horizontal": "PIANO",
+      "vertical": "ORGAN",
+      "relation": "Both are musical instruments"
+    }
+  ]
+} 

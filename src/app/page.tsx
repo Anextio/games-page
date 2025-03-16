@@ -1,103 +1,83 @@
-import Image from "next/image";
+import Link from 'next/link'
+
+interface GameCard {
+  title: string
+  description: string
+  href: string
+  color: string
+}
+
+const games: GameCard[] = [
+  {
+    title: 'Classic Wordle',
+    description: 'Guess the 5-letter word in 6 tries',
+    href: '/games/classic',
+    color: 'bg-green-100 hover:bg-green-200',
+  },
+  {
+    title: 'Speed Wordle',
+    description: 'Race against time to solve the word',
+    href: '/games/speed',
+    color: 'bg-yellow-100 hover:bg-yellow-200',
+  },
+  {
+    title: 'Double Wordle',
+    description: 'Solve two connected words at once',
+    href: '/games/double',
+    color: 'bg-purple-100 hover:bg-purple-200',
+  },
+  {
+    title: 'Hard Wordle',
+    description: 'Challenge yourself with 6-letter words',
+    href: '/games/hard',
+    color: 'bg-red-100 hover:bg-red-200',
+  },
+  {
+    title: 'Chain Wordle',
+    description: 'Each word must start with the last letter of the previous word',
+    href: '/games/chain',
+    color: 'bg-amber-100 hover:bg-amber-200',
+  },
+  {
+    title: 'Backwards Wordle',
+    description: 'Spell words in reverse order',
+    href: '/games/backwards',
+    color: 'bg-emerald-100 hover:bg-emerald-200',
+  },
+  {
+    title: 'Crosswordle',
+    description: 'Solve a crossword with themed words',
+    href: '/games/crosswordle',
+    color: 'bg-teal-100 hover:bg-teal-200',
+  },
+  {
+    title: 'Waffle Wordle',
+    description: 'Swap letters to solve the waffle grid',
+    href: '/games/waffle',
+    color: 'bg-pink-100 hover:bg-pink-200',
+  },
+]
 
 export default function Home() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+    <div className="space-y-6">
+      <div className="text-center">
+        <h1 className="text-4xl font-bold text-gray-900 mb-4">Welcome to Wordle Games</h1>
+        <p className="text-xl text-gray-600">Choose your challenge and start playing!</p>
+      </div>
+      
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6 mt-8">
+        {games.map((game) => (
+          <Link 
+            key={game.title} 
+            href={game.href}
+            className={`${game.color} rounded-lg p-6 shadow-sm transition-transform hover:scale-105`}
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+            <h2 className="text-2xl font-semibold text-gray-900 mb-2">{game.title}</h2>
+            <p className="text-gray-600">{game.description}</p>
+          </Link>
+        ))}
+      </div>
     </div>
-  );
+  )
 }

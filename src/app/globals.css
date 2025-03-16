@@ -1,26 +1,74 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  .perspective-500 {
+    perspective: 500px;
+  }
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --foreground-rgb: 255, 255, 255;
+    --background-rgb: 26, 26, 26;
   }
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  color: rgb(var(--foreground-rgb));
+  background: rgb(var(--background-rgb));
+}
+
+/* Animations */
+@keyframes pop {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  75% { transform: translateX(5px); }
+}
+
+@keyframes flip {
+  0% { transform: rotateX(0); }
+  100% { transform: rotateX(180deg); }
+}
+
+/* Custom utility classes */
+.animate-pop {
+  animation: pop 0.3s ease-in-out;
+}
+
+.animate-shake {
+  animation: shake 0.3s ease-in-out;
+}
+
+.animate-flip {
+  animation: flip 0.6s ease-in-out;
+}
+
+/* Keyboard styles */
+.keyboard-key {
+  @apply rounded font-bold uppercase transition-colors;
+  @apply hover:brightness-95 active:brightness-90;
+  @apply select-none cursor-pointer;
+}
+
+/* Grid cell styles */
+.grid-cell {
+  @apply border-2 flex items-center justify-center;
+  @apply text-2xl font-bold rounded;
+  @apply transition-all duration-300;
 }

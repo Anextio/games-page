@@ -1,36 +1,79 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Crosswordle - A Daily Word Puzzle Game
 
-## Getting Started
+A daily puzzle game inspired by Wordle where players try to guess two crossing words simultaneously.
 
-First, run the development server:
+## How to Play
+
+- Fill in the horizontal word first, then the vertical word
+- Each guess is evaluated against both words
+- Green tiles indicate correct letters in the correct position
+- Yellow tiles indicate correct letters in the wrong position  
+- Orange tiles indicate letters that appear in the other crossing word
+- Gray tiles indicate letters that don't appear in either word
+- The words are related thematically
+- New puzzle every day!
+
+## How to Host on GitHub Pages
+
+1. Fork this repository
+2. Enable GitHub Pages in your repository settings:
+   - Go to Settings > Pages
+   - Select the `main` branch as the source
+   - Choose the root folder (`/`)
+   - Click Save
+
+Your game will be available at `https://[your-username].github.io/[repository-name]/`
+
+## Adding New Puzzles
+
+Puzzles are stored in `src/data/crosswordlePuzzles.json`. To add new puzzles:
+
+1. Open the file `src/data/crosswordlePuzzles.json`
+2. Add new entries to the `puzzles` array following this format:
+
+```json
+{
+  "id": 1015,  // Increment the ID for each new puzzle
+  "horizontal": "HEART",  // 5-letter horizontal word
+  "vertical": "HAPPY",    // 5-letter vertical word 
+  "relation": "Both relate to emotions"  // Describe the relationship between words
+}
+```
+
+3. Ensure both words share at least one letter so they can cross
+4. The game selects puzzles based on the current date:
+   - The puzzle number is calculated as 1000 + days since Jan 1, 2023
+   - Puzzles are then matched by ID
+   - If no exact match is found, it cycles through available puzzles
+
+## Rules for Good Puzzles
+
+1. Both words must be 5 letters long
+2. Words should share at least one common letter (for the crossing)
+3. Use common, recognizable words
+4. Choose words with a clear thematic relationship
+5. Avoid obscure words, slang, or offensive content
+
+## Development
+
+### Installation
+
+```bash
+npm install
+```
+
+### Running Locally
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Building for Production
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npm run build
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## License
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+MIT
